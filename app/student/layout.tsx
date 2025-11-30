@@ -8,11 +8,11 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { LogOut, BookOpen, TrendingUp, Brain, Sparkles, Globe } from "lucide-react"
 import { createClient } from "@/lib/supabase"
-import { LanguageProvider, useLanguage } from "@/lib/contexts/LanguageContext"
+import { useTranslation } from 'react-i18next'
 
 // Language selector component
 function LanguageSelector() {
-  const { language, setLanguage, t } = useLanguage()
+  const { i18n } = useTranslation()
 
   const languages = [
     { code: "en" as const, name: "English", flag: "🇬🇧" },
@@ -21,12 +21,26 @@ function LanguageSelector() {
     { code: "ta" as const, name: "தமிழ்", flag: "🇮🇳" },
   ]
 
+  const handleLanguageChange = async (newLanguage: string) => {
+    await i18n.changeLanguage(newLanguage)
+    
+    // Save to database if user is logged in
+    const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user) {
+      await supabase
+        .from('student_profiles')
+        .update({ language: newLanguage })
+        .eq('id', user.id)
+    }
+  }
+
   return (
     <div className="flex items-center gap-2">
       <Globe className="w-4 h-4 text-muted-foreground" />
       <select
-        value={language}
-        onChange={(e) => setLanguage(e.target.value as any)}
+        value={i18n.language}
+        onChange={(e) => handleLanguageChange(e.target.value)}
         className="px-2 py-1 border rounded-md text-sm bg-background hover:bg-muted transition-colors"
       >
         {languages.map((lang) => (
@@ -44,7 +58,7 @@ function StudentLayoutContent({ children }: { children: React.ReactNode }) {
   const router = useRouter()
   const [user, setUser] = useState<any>(null)
   const supabase = createClient()
-  const { t, isLoading } = useLanguage()
+  const { t, ready } = useTranslation()
 
   useEffect(() => {
     const userData = localStorage.getItem("user")
@@ -62,7 +76,7 @@ function StudentLayoutContent({ children }: { children: React.ReactNode }) {
     router.push("/auth/login")
   }
 
-  if (!user || isLoading) {
+  if (!user || !ready) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -89,13 +103,13 @@ function StudentLayoutContent({ children }: { children: React.ReactNode }) {
             <LanguageSelector />
             <div className="text-sm">
               <p className="font-medium text-foreground">{user.name}</p>
-              <p className="text-xs text-muted-foreground">{t.common.grade} {user.grade}</p>
+              <p className="text-xs text-muted-foreground">{t('common.grade')} {user.grade}</p>
             </div>
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={handleLogout} 
-              title={t.common.logout}
+              title={t('common.logout')}
               className="hover:bg-destructive/10 hover:text-destructive transition-colors"
             >
               <LogOut className="w-4 h-4" />
@@ -112,25 +126,25 @@ function StudentLayoutContent({ children }: { children: React.ReactNode }) {
             <Link href="/student/learn">
               <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors cursor-pointer group">
                 <BookOpen className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                <span className="font-medium">{t.student.learn}</span>
+                <span className="font-medium">{t('student.learn')}</span>
               </div>
             </Link>
             <Link href="/student/flashcards">
               <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors cursor-pointer group">
                 <Brain className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                <span className="font-medium">{t.student.flashcards}</span>
+                <span className="font-medium">{t('student.flashcards')}</span>
               </div>
             </Link>
             <Link href="/student/adk-agents">
               <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors cursor-pointer group">
                 <Sparkles className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                <span className="font-medium">{t.student.aiAgents}</span>
+                <span className="font-medium">{t('student.aiAgents')}</span>
               </div>
             </Link>
             <Link href="/student/progress">
               <div className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors cursor-pointer group">
                 <TrendingUp className="w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
-                <span className="font-medium">{t.student.myProgress}</span>
+                <span className="font-medium">{t('student.myProgress')}</span>
               </div>
             </Link>
           </div>
@@ -148,9 +162,5 @@ export default function StudentLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
-    <LanguageProvider>
-      <StudentLayoutContent>{children}</StudentLayoutContent>
-    </LanguageProvider>
-  )
+  return <StudentLayoutContent>{children}</StudentLayoutContent>
 }

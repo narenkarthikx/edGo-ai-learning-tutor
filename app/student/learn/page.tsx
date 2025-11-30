@@ -8,7 +8,7 @@ import { BookOpen, BarChart3, Zap, AlertCircle } from "lucide-react"
 import LessonCard from "@/components/student/lesson-card"
 import GapDetector from "@/components/student/gap-detector"
 import { createClient } from "@/lib/supabase"
-import { useLanguage } from "@/lib/contexts/LanguageContext"
+import { useTranslation } from 'react-i18next'
 
 // Lazy load heavy components
 const AIChatTutor = lazy(() => import("@/components/student/ai-chat-tutor"))
@@ -45,7 +45,7 @@ interface Gap {
 
 export default function LearnPage() {
   const supabase = createClient()
-  const { t } = useLanguage()
+  const { t } = useTranslation()
   const [user, setUser] = useState<any>(null)
   const [profile, setProfile] = useState<any>(null)
   const [lessons, setLessons] = useState<Lesson[]>([])
@@ -320,10 +320,10 @@ export default function LearnPage() {
       {/* Header */}
       <div className="space-y-2">
         <h1 className="text-3xl font-bold text-foreground">
-          {t.common.welcome}, {profile?.name}!
+          {t('common.welcome')}, {profile?.name}!
         </h1>
         <p className="text-muted-foreground">
-          {t.common.grade} {profile?.grade} • {t.student.myLessons}
+          {t('common.grade')} {profile?.grade} • {t('student.myLessons')}
         </p>
       </div>
 
@@ -333,7 +333,7 @@ export default function LearnPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">{t.student.completedLessons}</p>
+                <p className="text-sm text-muted-foreground">{t('student.completedLessons')}</p>
                 <p className="text-3xl font-bold text-primary">0</p>
               </div>
               <BookOpen className="w-8 h-8 text-primary/20" />
@@ -345,8 +345,8 @@ export default function LearnPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">{t.student.learningStreak}</p>
-                <p className="text-3xl font-bold text-primary">0 {t.common.days}</p>
+                <p className="text-sm text-muted-foreground">{t('student.learningStreak')}</p>
+                <p className="text-3xl font-bold text-primary">0 {t('common.days')}</p>
               </div>
               <Zap className="w-8 h-8 text-primary/20" />
             </div>
@@ -357,7 +357,7 @@ export default function LearnPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">{t.student.skillLevel}</p>
+                <p className="text-sm text-muted-foreground">{t('student.skillLevel')}</p>
                 <p className="text-3xl font-bold text-primary">-</p>
               </div>
               <BarChart3 className="w-8 h-8 text-primary/20" />
@@ -374,11 +374,11 @@ export default function LearnPage() {
               <AlertCircle className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
               <div className="flex-1">
                 <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">
-                  {gaps.length} {t.student.gapsDetected}
+                  {gaps.length} {t('student.gapsDetected')}
                 </h3>
-                <p className="text-sm text-blue-800 dark:text-blue-200 mb-3">{t.student.gapsDescription}</p>
+                <p className="text-sm text-blue-800 dark:text-blue-200 mb-3">{t('student.gapsDescription')}</p>
                 <Button size="sm" onClick={() => setActiveTab("gaps")} className="bg-blue-600 hover:bg-blue-700">
-                  {t.common.viewRecommendations}
+                  {t('common.viewRecommendations')}
                 </Button>
               </div>
             </div>
@@ -389,13 +389,13 @@ export default function LearnPage() {
       {/* Tabs */}
       <div className="flex gap-2 border-b overflow-x-auto">
         {[
-          { key: "recommended", label: t.common.recommended },
-          { key: "gaps", label: `${t.student.learningGaps} (${gaps.length})` },
-          { key: "all", label: t.common.allLessons },
-          { key: "ai-tutor", label: `🤖 ${t.student.aiTutor}` },
-          { key: "assessment", label: `📝 ${t.student.smartTest}` },
-          { key: "materials", label: `📚 ${t.student.studyMaterials}` },
-          { key: "syllabus", label: `📋 ${t.student.syllabus}` },
+          { key: "recommended", label: t('common.recommended') },
+          { key: "gaps", label: `${t('student.learningGaps')} (${gaps.length})` },
+          { key: "all", label: t('common.allLessons') },
+          { key: "ai-tutor", label: `🤖 ${t('student.aiTutor')}` },
+          { key: "assessment", label: `📝 ${t('student.smartTest')}` },
+          { key: "materials", label: `📚 ${t('student.studyMaterials')}` },
+          { key: "syllabus", label: `📋 ${t('student.syllabus')}` },
         ].map((tab) => (
           <button
             key={tab.key}
@@ -431,7 +431,7 @@ export default function LearnPage() {
           ) : (
             <Card>
               <CardContent className="pt-6 text-center">
-                <p className="text-muted-foreground">{t.student.noGaps}</p>
+                <p className="text-muted-foreground">{t('student.noGaps')}</p>
               </CardContent>
             </Card>
           )}

@@ -7,8 +7,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Brain, Sparkles } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 
 export default function ADKAgentsPage() {
+  const { t } = useTranslation()
   const [userGrade, setUserGrade] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -48,11 +50,11 @@ export default function ADKAgentsPage() {
         <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto mb-8">
           <TabsTrigger value="interface" className="flex items-center gap-2">
             <Brain className="w-4 h-4" />
-            Try Agents
+            {t('agents.tryAgents')}
           </TabsTrigger>
           <TabsTrigger value="about" className="flex items-center gap-2">
             <Sparkles className="w-4 h-4" />
-            About Agents
+            {t('agents.aboutAgents')}
           </TabsTrigger>
         </TabsList>
         

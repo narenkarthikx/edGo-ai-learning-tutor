@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { AlertCircle, TrendingUp } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/lib/contexts/LanguageContext"
+import { useTranslation } from 'react-i18next'
 
 interface Gap {
   id: string
@@ -11,7 +11,7 @@ interface Gap {
 }
 
 export default function GapDetector({ gap }: { gap: Gap }) {
-  const { t } = useLanguage()
+  const { t } = useTranslation()
   
   const severityColor = {
     low: "bg-green-50 border-green-200 dark:bg-green-950/20 dark:border-green-800",
@@ -26,9 +26,9 @@ export default function GapDetector({ gap }: { gap: Gap }) {
   }
 
   const severityNames = {
-    low: t.common.low,
-    medium: t.common.medium,
-    high: t.common.high,
+    low: t('common.low'),
+    medium: t('common.medium'),
+    high: t('common.high'),
   }
 
   const severityBadgeColor = {
@@ -47,7 +47,7 @@ export default function GapDetector({ gap }: { gap: Gap }) {
             <span
               className={`text-xs font-bold px-3 py-1 rounded-full ${severityBadgeColor[gap.severity]}`}
             >
-              {severityNames[gap.severity]} {t.common.priority}
+              {severityNames[gap.severity]} {t('common.priority')}
             </span>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed pl-8">{gap.recommendation}</p>
@@ -57,7 +57,7 @@ export default function GapDetector({ gap }: { gap: Gap }) {
             className="w-full bg-transparent hover:bg-primary/10 hover:border-primary transition-all hover:scale-105 group"
           >
             <TrendingUp className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-            {t.common.practiceNow}
+            {t('common.practiceNow')}
           </Button>
         </div>
       </CardContent>

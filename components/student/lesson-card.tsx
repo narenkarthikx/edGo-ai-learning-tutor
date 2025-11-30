@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Clock, CheckCircle } from "lucide-react"
-import { useLanguage } from "@/lib/contexts/LanguageContext"
+import { useTranslation } from 'react-i18next'
 
 interface Lesson {
   id: string
@@ -13,7 +13,7 @@ interface Lesson {
 }
 
 export default function LessonCard({ lesson }: { lesson: Lesson }) {
-  const { t } = useLanguage()
+  const { t } = useTranslation()
   
   const difficultyColor = {
     beginner: "bg-green-100 text-green-700 dark:bg-green-950 dark:text-green-300",
@@ -22,23 +22,23 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
   }
 
   const subjectNames = {
-    literacy: t.subjects.literacy,
-    numeracy: t.subjects.numeracy,
-    mathematics: t.subjects.mathematics,
-    science: t.subjects.science,
-    english: t.subjects.english,
-    social_studies: t.subjects.socialStudies,
-    hindi: t.subjects.hindi,
-    physics: t.subjects.physics,
-    chemistry: t.subjects.chemistry,
-    biology: t.subjects.biology,
-    computer_science: t.subjects.computerScience,
+    literacy: t('subjects.literacy'),
+    numeracy: t('subjects.numeracy'),
+    mathematics: t('subjects.mathematics'),
+    science: t('subjects.science'),
+    english: t('subjects.english'),
+    social_studies: t('subjects.socialStudies'),
+    hindi: t('subjects.hindi'),
+    physics: t('subjects.physics'),
+    chemistry: t('subjects.chemistry'),
+    biology: t('subjects.biology'),
+    computer_science: t('subjects.computerScience'),
   }
 
   const difficultyNames = {
-    beginner: t.common.beginner,
-    intermediate: t.common.intermediate,
-    advanced: t.common.advanced,
+    beginner: t('common.beginner'),
+    intermediate: t('common.intermediate'),
+    advanced: t('common.advanced'),
   }
 
   const subjectColor = {
@@ -70,7 +70,7 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
           {lesson.completed && (
             <div className="flex items-center gap-1 text-green-600">
               <CheckCircle className="w-5 h-5" />
-              <span className="text-xs font-medium">{t.common.completed}</span>
+              <span className="text-xs font-medium">{t('common.completed')}</span>
             </div>
           )}
         </div>
@@ -84,7 +84,7 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
           </span>
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Clock className="w-4 h-4" />
-            {lesson.duration} {t.common.minutes}
+            {lesson.duration} {t('common.minutes')}
           </div>
         </div>
         <Button 
@@ -92,7 +92,7 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
           disabled={lesson.completed}
           variant={lesson.completed ? "secondary" : "default"}
         >
-          {lesson.completed ? t.common.completed : t.common.startLesson}
+          {lesson.completed ? t('common.completed') : t('common.startLesson')}
         </Button>
       </CardContent>
     </Card>

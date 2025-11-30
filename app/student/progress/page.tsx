@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
+import { useTranslation } from 'react-i18next'
 
 interface ProgressData {
   name: string
@@ -14,6 +15,7 @@ interface ProgressData {
 }
 
 export default function ProgressPage() {
+  const { t } = useTranslation()
   const [user, setUser] = useState<any>(null)
   const [progressData, setProgressData] = useState<ProgressData[]>([])
   const [userGrade, setUserGrade] = useState<number>(10)
@@ -53,16 +55,16 @@ export default function ProgressPage() {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h1 className="text-3xl font-bold text-foreground">Grade {userGrade} Progress Report</h1>
-        <p className="text-muted-foreground">Tamil Nadu State Board - TNSCERT Curriculum Tracking</p>
+        <h1 className="text-3xl font-bold text-foreground">{t('progress.title')}</h1>
+        <p className="text-muted-foreground">{t('progress.subtitle')}</p>
       </div>
 
       {/* Overall Performance */}
       <div className="grid md:grid-cols-3 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>Overall Performance</CardTitle>
-            <CardDescription>All subjects average</CardDescription>
+            <CardTitle>{t('progress.overallPerformance')}</CardTitle>
+            <CardDescription>{t('progress.allSubjects')}</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
@@ -70,14 +72,14 @@ export default function ProgressPage() {
               <div className="w-full bg-muted rounded-full h-2">
                 <div className="bg-primary h-2 rounded-full" style={{ width: `${overallAverage}%` }}></div>
               </div>
-              <p className="text-sm text-muted-foreground">↑ Ready for Board Exams</p>
+              <p className="text-sm text-muted-foreground">↑ {t('progress.readyExams')}</p>
             </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Mathematics</CardTitle>
+            <CardTitle>{t('subjects.mathematics')}</CardTitle>
             <CardDescription>Algebra, Geometry, Trigonometry</CardDescription>
           </CardHeader>
           <CardContent>
@@ -86,14 +88,14 @@ export default function ProgressPage() {
               <div className="w-full bg-muted rounded-full h-2">
                 <div className="bg-blue-500 h-2 rounded-full" style={{ width: `${latestData.mathematics}%` }}></div>
               </div>
-              <p className="text-sm text-muted-foreground">Strong in Quadratic Equations</p>
+              <p className="text-sm text-muted-foreground">{t('progress.strongIn')} Quadratic Equations</p>
             </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Science</CardTitle>
+            <CardTitle>{t('subjects.science')}</CardTitle>
             <CardDescription>Physics, Chemistry, Biology</CardDescription>
           </CardHeader>
           <CardContent>
@@ -102,7 +104,7 @@ export default function ProgressPage() {
               <div className="w-full bg-muted rounded-full h-2">
                 <div className="bg-green-500 h-2 rounded-full" style={{ width: `${latestData.science}%` }}></div>
               </div>
-              <p className="text-sm text-muted-foreground">Excellent in Biology</p>
+              <p className="text-sm text-muted-foreground">{t('progress.excellentIn')} Biology</p>
             </div>
           </CardContent>
         </Card>
@@ -111,7 +113,7 @@ export default function ProgressPage() {
       {/* Subject-wise Progress Chart */}
       <Card>
         <CardHeader>
-          <CardTitle>Monthly Subject Performance</CardTitle>
+          <CardTitle>{t('progress.monthlyProgress')}</CardTitle>
           <CardDescription>Grade {userGrade} Tamil Nadu Board Subjects</CardDescription>
         </CardHeader>
         <CardContent>
@@ -122,11 +124,11 @@ export default function ProgressPage() {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="mathematics" fill="#3b82f6" name="Mathematics" />
-              <Bar dataKey="science" fill="#10b981" name="Science" />
-              <Bar dataKey="english" fill="#f59e0b" name="English" />
-              <Bar dataKey="social" fill="#8b5cf6" name="Social Science" />
-              <Bar dataKey="tamil" fill="#ef4444" name="Tamil" />
+              <Bar dataKey="mathematics" fill="#3b82f6" name={t('subjects.mathematics')} />
+              <Bar dataKey="science" fill="#10b981" name={t('subjects.science')} />
+              <Bar dataKey="english" fill="#f59e0b" name={t('subjects.english')} />
+              <Bar dataKey="social" fill="#8b5cf6" name={t('progress.socialScience')} />
+              <Bar dataKey="tamil" fill="#ef4444" name={t('subjects.tamil')} />
             </BarChart>
           </ResponsiveContainer>
         </CardContent>
@@ -135,8 +137,8 @@ export default function ProgressPage() {
       {/* Tamil Nadu Board Exam Readiness */}
       <Card>
         <CardHeader>
-          <CardTitle>{userGrade === 10 ? 'Board Exam Readiness' : 'Foundation Building'} - Class {userGrade}</CardTitle>
-          <CardDescription>Subject-wise preparation status for TNSCERT {userGrade === 10 ? 'board examinations' : 'curriculum'}</CardDescription>
+          <CardTitle>{userGrade === 10 ? t('progress.boardReadiness') : t('progress.foundationBuilding')} - Class {userGrade}</CardTitle>
+          <CardDescription>{t('progress.preparationStatus')} TNSCERT {userGrade === 10 ? 'board examinations' : 'curriculum'}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -179,20 +181,20 @@ export default function ProgressPage() {
       {/* Recommendations */}
       <Card>
         <CardHeader>
-          <CardTitle>📚 Study Recommendations</CardTitle>
-          <CardDescription>Personalized suggestions for Grade {userGrade} Tamil Nadu {userGrade === 10 ? 'Board preparation' : 'curriculum learning'}</CardDescription>
+          <CardTitle>📚 {t('progress.studyRecommendations')}</CardTitle>
+          <CardDescription>{t('progress.personalizedSuggestions')} Grade {userGrade} Tamil Nadu {userGrade === 10 ? 'Board preparation' : 'curriculum learning'}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-3">
             {userGrade === 7 ? (
               <>
                 <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <h4 className="font-medium text-blue-900">🔢 Mathematics Foundation</h4>
+                  <h4 className="font-medium text-blue-900">🔢 {t('progress.mathFocus')}</h4>
                   <p className="text-sm text-blue-700">Practice more integer operations and fraction problems. Build strong number sense.</p>
                 </div>
                 <div className="p-3 bg-green-50 rounded-lg border border-green-200">
-                  <h4 className="font-medium text-green-900">🔬 Science Exploration</h4>
-                  <p className="text-sm text-green-700">Great curiosity! Focus on understanding plant nutrition and basic animal biology concepts.</p>
+                  <h4 className="font-medium text-green-900">🔬 {t('progress.scienceStrength')}</h4>
+                  <p className="text-sm text-green-700">{t('progress.excellentProgress')} Focus on understanding plant nutrition and basic animal biology concepts.</p>
                 </div>
                 <div className="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
                   <h4 className="font-medium text-yellow-900">📚 Reading Skills</h4>
@@ -202,15 +204,15 @@ export default function ProgressPage() {
             ) : (
               <>
                 <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
-                  <h4 className="font-medium text-blue-900">🔢 Mathematics Focus</h4>
+                  <h4 className="font-medium text-blue-900">🔢 {t('progress.mathFocus')}</h4>
                   <p className="text-sm text-blue-700">Practice more coordinate geometry problems. Review trigonometric identities.</p>
                 </div>
                 <div className="p-3 bg-green-50 rounded-lg border border-green-200">
-                  <h4 className="font-medium text-green-900">🔬 Science Strength</h4>
-                  <p className="text-sm text-green-700">Excellent progress! Focus on numerical problems in physics for board exam preparation.</p>
+                  <h4 className="font-medium text-green-900">🔬 {t('progress.scienceStrength')}</h4>
+                  <p className="text-sm text-green-700">{t('progress.excellentProgress')} Focus on numerical problems in physics for board exam preparation.</p>
                 </div>
                 <div className="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
-                  <h4 className="font-medium text-yellow-900">🌍 Social Science</h4>
+                  <h4 className="font-medium text-yellow-900">🌍 {t('progress.socialScience')}</h4>
                   <p className="text-sm text-yellow-700">Review Indian National Movement timeline. Practice map work for geography.</p>
                 </div>
               </>

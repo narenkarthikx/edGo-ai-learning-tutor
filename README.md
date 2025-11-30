@@ -105,7 +105,7 @@ npm run dev
 │   │   ├── class10-curriculum.ts    # TN Class 10 data
 │   │   └── flashcards-curriculum.ts # Flashcard content
 │   ├── utils/                  # Utilities
-│   │   └── translations.ts     # Multi-language support
+│   │   ├── i18n/               # Internationalization\n│   │   │   ├── i18n.ts         # i18n configuration\n│   │   │   └── locales/        # Translation JSON files
 │   ├── supabase/               # Database utilities
 │   ├── supabase.ts             # Supabase client
 │   └── utils.ts                # Helper functions

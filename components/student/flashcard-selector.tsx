@@ -13,6 +13,7 @@ import {
   TrendingUp
 } from 'lucide-react'
 import { getFlashcards, getAvailableChapters } from '@/lib/curriculum/flashcards-curriculum'
+import { useTranslation } from 'react-i18next'
 
 interface FlashcardSelectorProps {
   grade: number
@@ -20,16 +21,17 @@ interface FlashcardSelectorProps {
 }
 
 export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps) {
+  const { t } = useTranslation()
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
 
   const subjects = grade === 7
     ? [
-        { id: 'mathematics', name: 'Mathematics', icon: '🔢', color: 'from-blue-500 to-cyan-500' },
-        { id: 'science', name: 'Science', icon: '🔬', color: 'from-green-500 to-emerald-500' },
+        { id: 'mathematics', name: t('subjects.mathematics'), icon: '🔢', color: 'from-blue-500 to-cyan-500' },
+        { id: 'science', name: t('subjects.science'), icon: '🔬', color: 'from-green-500 to-emerald-500' },
       ]
     : [
-        { id: 'mathematics', name: 'Mathematics', icon: '🔢', color: 'from-blue-500 to-cyan-500' },
-        { id: 'science', name: 'Science', icon: '🔬', color: 'from-green-500 to-emerald-500' },
+        { id: 'mathematics', name: t('subjects.mathematics'), icon: '🔢', color: 'from-blue-500 to-cyan-500' },
+        { id: 'science', name: t('subjects.science'), icon: '🔬', color: 'from-green-500 to-emerald-500' },
       ]
 
   if (!selectedSubject) {
@@ -42,10 +44,10 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
             </div>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold">
-            Flashcards for Class {grade}
+            {t('flashcards.title')}
           </h1>
           <p className="text-lg text-muted-foreground">
-            Master your concepts with interactive flashcards!
+            {t('flashcards.subtitle')}
           </p>
         </div>
 
@@ -76,16 +78,16 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-2">
                       <BookOpen className="w-4 h-4 text-blue-600" />
-                      <span>{availableChapters.length} Chapters</span>
+                      <span>{availableChapters.length} {t('flashcards.chapters')}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-4 h-4 text-yellow-600" />
-                      <span>{totalFlashcards} Cards</span>
+                      <span>{totalFlashcards} {t('flashcards.cards')}</span>
                     </div>
                   </div>
                   <Button className="w-full">
                     <GraduationCap className="w-4 h-4 mr-2" />
-                    Start Learning
+                    {t('flashcards.startLearning')}
                   </Button>
                 </CardContent>
               </Card>
@@ -98,19 +100,19 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
             <div className="flex items-start gap-4">
               <Target className="w-8 h-8 text-purple-600 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-semibold text-lg mb-2">How Flashcards Help You Learn</h3>
+                <h3 className="font-semibold text-lg mb-2">{t('flashcards.howHelp')}</h3>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <TrendingUp className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span><strong>Active Recall:</strong> Test yourself instead of passive reading</span>
+                    <span>{t('flashcards.activeRecall')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Brain className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <span><strong>Spaced Repetition:</strong> Review concepts at the right intervals</span>
+                    <span>{t('flashcards.spacedRepetition')}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <Sparkles className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
-                    <span><strong>Track Progress:</strong> See your improvement in real-time</span>
+                    <span>{t('flashcards.trackProgress')}</span>
                   </li>
                 </ul>
               </div>
@@ -132,15 +134,15 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
           variant="outline"
           onClick={() => setSelectedSubject(null)}
         >
-          ← Back
+          {t('flashcards.back')}
         </Button>
         <div>
           <h2 className="text-2xl font-bold flex items-center gap-2">
             <span>{selectedSubjectInfo.icon}</span>
-            {selectedSubjectInfo.name} Flashcards
+            {selectedSubjectInfo.name} {t('flashcards.title')}
           </h2>
           <p className="text-sm text-muted-foreground">
-            Select a chapter to start practicing
+            {t('flashcards.selectChapter')}
           </p>
         </div>
       </div>
@@ -162,7 +164,7 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-primary">{set.cards.length}</div>
-                  <div className="text-xs text-muted-foreground">cards</div>
+                  <div className="text-xs text-muted-foreground">{t('flashcards.cards')}</div>
                 </div>
               </div>
             </CardHeader>
@@ -180,7 +182,7 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
                         : 'border-red-500 text-red-700'
                     }
                   >
-                    {card.difficulty}
+                    {t(`flashcards.difficulty.${card.difficulty}`)}
                   </Badge>
                 ))}
                 {set.cards.length > 3 && (
@@ -189,7 +191,7 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
               </div>
               <Button className="w-full mt-4" size="sm">
                 <Sparkles className="w-4 h-4 mr-2" />
-                Start Practice
+                {t('flashcards.startPractice')}
               </Button>
             </CardContent>
           </Card>
@@ -200,9 +202,9 @@ export function FlashcardSelector({ grade, onSelectSet }: FlashcardSelectorProps
         <Card className="text-center p-12">
           <CardContent>
             <BookOpen className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-            <CardTitle className="mb-2">No Flashcards Available Yet</CardTitle>
+            <CardTitle className="mb-2">{t('flashcards.noFlashcards')}</CardTitle>
             <CardDescription>
-              Flashcards for this subject are coming soon!
+              {t('flashcards.comingSoon')}
             </CardDescription>
           </CardContent>
         </Card>

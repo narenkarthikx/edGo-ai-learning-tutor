@@ -7,8 +7,10 @@ import { getFlashcards } from '@/lib/curriculum/flashcards-curriculum'
 import { FlashcardSet } from '@/lib/curriculum/flashcards-curriculum'
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useTranslation } from 'react-i18next'
 
 export default function FlashcardsPage() {
+  const { t } = useTranslation()
   const [selectedSet, setSelectedSet] = useState<FlashcardSet | null>(null)
   const [userGrade, setUserGrade] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
@@ -62,7 +64,7 @@ export default function FlashcardsPage() {
         <Card>
           <CardContent className="pt-6 text-center">
             <p className="text-lg text-muted-foreground">
-              Please set up your profile to access flashcards.
+              {t('flashcards.comingSoon')}
             </p>
           </CardContent>
         </Card>

@@ -17,7 +17,9 @@ Contains curriculum data and flashcard systems:
 
 ### `/utils` - Utilities
 Contains helper functions and configurations:
-- **`translations.ts`** - Multi-language support (Tamil, English, Hindi)
+- **`i18n/`** - Internationalization with react-i18next
+  - `i18n.ts` - i18n configuration
+  - `locales/` - Translation JSON files (English, Hindi, Telugu, Tamil)
 - **`utils.ts`** - General utility functions
 
 ### `/supabase` - Database
@@ -45,8 +47,12 @@ import { getFlashcards } from '@/lib/curriculum/flashcards-curriculum'
 
 ### Importing Utilities
 ```typescript
-import { translations } from '@/lib/utils/translations'
+import { useTranslation } from 'react-i18next'
 import { cn } from '@/lib/utils'
+
+// Example usage
+const { t } = useTranslation()
+const welcomeText = t('common.welcome')
 ```
 
 ### Importing Supabase
@@ -58,6 +64,6 @@ import { supabase } from '@/lib/supabase'
 
 - **6 Specialized AI Agents**: Content Generator, Gap Analyzer, Assessment, Motivator, Tutor, General Assistant
 - **Multi-grade Support**: Class 7 and Class 10 Tamil Nadu curriculum
-- **Multi-language**: Tamil, English, Hindi translations
+- **Multi-language**: English, Hindi, Telugu, Tamil with react-i18next
 - **Adaptive Learning**: Gap detection and personalized recommendations
 - **Interactive Flashcards**: Subject-wise flashcard sets with progress tracking
