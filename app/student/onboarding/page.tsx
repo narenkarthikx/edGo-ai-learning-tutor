@@ -94,7 +94,7 @@ export default function OnboardingPage() {
         {step === 1 && (
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Welcome to Learn Buddy</CardTitle>
+              <CardTitle className="text-2xl">Welcome to Edvion</CardTitle>
               <CardDescription>Let's set up your personalized learning experience</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">

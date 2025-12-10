@@ -150,7 +150,7 @@ export default function RegisterPage() {
         <div className="text-center space-y-3">
           <Badge variant="secondary" className="mx-auto px-3 py-1 animate-pulse-soft">
             <Sparkles className="w-3 h-3 mr-1" />
-            Join Learn Buddy
+            Join Edvion
           </Badge>
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
             Create Your Account

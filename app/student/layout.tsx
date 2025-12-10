@@ -96,7 +96,7 @@ function StudentLayoutContent({ children }: { children: React.ReactNode }) {
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center text-white font-bold shadow-md">
               <Brain className="w-5 h-5" />
             </div>
-            <span className="font-bold text-foreground hidden sm:inline">Learn Buddy</span>
+            <span className="font-bold text-foreground hidden sm:inline">Edvion</span>
           </Link>
 
           <div className="flex items-center gap-4">

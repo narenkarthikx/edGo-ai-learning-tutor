@@ -1,4 +1,4 @@
-# AI Learn Buddy - Complete Setup Guide
+# AI Edvion - Complete Setup Guide
 
 ## Overview
 This is a full-stack web application for personalized AI tutoring in government schools (Classes 1-12) with support for multilingual learning, automated gap detection, and teacher dashboards.
@@ -128,7 +128,7 @@ yarn dev
 
 ### 5.2 Open in Browser
 - Go to `http://localhost:3000`
-- You should see the AI Learn Buddy homepage
+- You should see the AI Edvion homepage
 - Click "Get Started" to register
 
 ### 5.3 Test User Creation

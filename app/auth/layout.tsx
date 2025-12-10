@@ -36,7 +36,7 @@ export default function AuthLayout({
         </div>
         <div className="flex flex-col">
           <span className="text-lg font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            Learn Buddy
+            Edvion
           </span>
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
             <Sparkles className="w-3 h-3" />

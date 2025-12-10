@@ -2,7 +2,7 @@
 
 ## What's Been Created
 
-I've built a complete, intuitive flashcard system for your AI Learn Buddy platform! Here's what's included:
+I've built a complete, intuitive flashcard system for your AI Edvion platform! Here's what's included:
 
 ### ✅ New Files Created
 

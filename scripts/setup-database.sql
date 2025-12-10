@@ -1,4 +1,4 @@
--- AI Learn Buddy - Supabase Database Schema
+-- AI Edvion - Supabase Database Schema
 -- Run these queries in your Supabase SQL editor to set up the database
 
 -- ============================================

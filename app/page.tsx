@@ -103,7 +103,7 @@ export default function Home() {
             <Brain className="w-6 h-6" />
           </div>
           <span className="text-xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
-            Learn Buddy
+            Edvion
           </span>
           <Badge variant="secondary" className="ml-2 animate-pulse-soft">
             <Sparkles className="w-3 h-3 mr-1" />
@@ -312,7 +312,7 @@ export default function Home() {
               </div>
               <div className="flex-1 text-center md:text-left">
                 <blockquote className="text-lg italic mb-4">
-                  "Learn Buddy has revolutionized how our students engage with learning. The AI adaptation is incredible!"
+                  "Edvion has revolutionized how our students engage with learning. The AI adaptation is incredible!"
                 </blockquote>
                 <div className="font-semibold text-primary">Priya Sharma</div>
                 <div className="text-sm text-muted-foreground">Government School Teacher, Delhi</div>
@@ -378,7 +378,7 @@ export default function Home() {
                 <Brain className="w-5 h-5" />
               </div>
               <span className="text-lg font-bold bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                Learn Buddy
+                Edvion
               </span>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">

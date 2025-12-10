@@ -90,7 +90,7 @@ export default function LoginPage() {
             Welcome Back
           </Badge>
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-            Sign in to Learn Buddy
+            Sign in to Edvion
           </CardTitle>
           <CardDescription className="text-base">
             Continue your personalized learning journey
